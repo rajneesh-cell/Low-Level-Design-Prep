@@ -1,0 +1,49 @@
+﻿                                                      Book My Show:
+
+Functional requirements:
+
+1. The user should be able to signup and login into the system.
+
+2. The loggedin user would be able to search for movies.
+
+3. The system should list all the movies currently listed and have shows for.
+
+4. The user selects the movie he wants to book the ticket and the city.
+
+5. The system lists all the theaters which currently have the show for the movie.
+
+6. The user selects the theatre in which he wants to book the show. Every show has a screen
+
+7. The system lists all the shows running for the movie in that particular theatre
+
+8. The user than selects the show he wants to book the ticket.
+
+9. The system shows all the availale seats for the show.
+
+10. Every seat has a type, GOLD, SILVER, BRNOZE.
+
+11. Every seat type has different price.
+
+12. The user selects the seat he wants to book and start the payment.
+
+13. The system accepts the payment by UPI and CREDIT card.
+
+14. The system locks the seat for 5 minutes or until the payment is successful, if successfull the seat is BOOKED
+
+15 if payment fails or 5 minutes pass since the locking the seat becomes AVAILABLE again
+
+16. The system generates a ticket for the user and sends it over an email as a notification.
+
+17. The user can CANCEL the booking and seat becomes AVAILABLE again.
+
+18. The system generates a REFUND as per cancellation policy and puts a notification ove the email
+
+Admin:
+
+1. Admin can add or remove theaters in a city.
+2. Admin can add or remove screens for a theater, with seating layout and seat types.
+3. Admin can add or remove movies to the system.
+4. Admin can create or remove a show by assigning a movie to a screen at a specific time with pricing per seat type.
+
+
+
