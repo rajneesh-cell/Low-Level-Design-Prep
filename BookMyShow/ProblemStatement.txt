@@ -1,0 +1,1 @@
+﻿Q) Design a Applications which allows user to book movie tickets like Book My Show.
