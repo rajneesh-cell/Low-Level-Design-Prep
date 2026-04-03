@@ -32,7 +32,7 @@ Functional requirements:
 
 15 if payment fails or 5 minutes pass since the locking the seat becomes AVAILABLE again
 
-16. The system generates a ticket for the user and sends it over an email as a notification.
+16. The system generates a ticket for the user and sends it over an email as a notification and Booking is CONFIRMED.
 
 17. The user can CANCEL the booking and seat becomes AVAILABLE again.
 
@@ -45,5 +45,32 @@ Admin:
 3. Admin can add or remove movies to the system.
 4. Admin can create or remove a show by assigning a movie to a screen at a specific time with pricing per seat type.
 
+Nouns:
+User, Movie, Show, Theatre(City), Screen, Seat, Enum SeatType(GOLD, SILVER, BRONZE), Payment, Enum PaymentType(UPI, CREDIT_CARD), Enum PaymentStatus(SUCCESSFUL, FAILED, INPROGRESS),  Enum SeatStatus(AVAILABLE, LOCKED, BOOKED), Booking, Enum BookingStatus (CONFIRMED, CANCELLED, PENDING), Notification(Shall become service) , Refund
 
+Verbs:
+logIn, signUp, searchMovie, selectTheatre, selectShow, selectSeat, lockSeat, releaseSeat, BookTicket, initiatePayment, sendNotification, cancelBooking, initiateRefund
+
+Entities:
+User---> UserId, UserName, Email, MobileNumber, Bookings
+Movie, MovieId, Name, Language, Genre, Rating
+Show --> Movie, startTIme, EndTime, Screen, Map<seatType, amount) 
+Screen ---> ScreenId, shows,  seats
+Theatre, ---- > TheatreId, TheatreName, Screens, city
+Seat ---> SeatId, SeatType, SeatStatus, lockSeat(), releaseSeat()
+SeatType ---> GOLD, SILVER, BRONZE
+Payment, --> paymentId, paymentType, paymentStatus, amount,
+PaymentType----> UPI, CREDIT_CARD
+PaymentStatus ----> SUCCESSFUL, FAILED, PENDING
+SeatStatus -----> LOCKED, BOOKED, AVAILABLE
+Booking, ------> User, BookingId, Show, Seats, BookingStatus, Payment
+BookingStatus, ----> CONFIRMED, CANCELLED, PENDING
+Refund ----> RefundId, Payment, refundStatus(PROCESSED, PENDING)
+
+Services:
+MovieService ---> searchMovie (movieName, City) --> Theatre: []
+BookingService ----> selectTheatre(TheatreId, MovieId) --->Shows: [], selectShow(showId) -->AvailableSeats: [], bookSeats(showId, Seat: [])  --->Booking, cancelBooking(BookingId) -> refundStatus
+PaymentServcie -----> initiatePayment(paymentType, amount): PaymentStatus(SUCCESSFUL, FAILED), initiateRefund(paymentType, amount): PaymentStatus(SUCCESSFUL, FAILED)
+NotificationService -----> sendNotification(user,  message) ----> messageId
+TheatreAdminService ----> AddTheatre(Theatre) -> theatreId, removeTheatre(theatreId)  -> theatreId, AddScreen(Screen, theatreId) ---> screenId , removeScreen(screenId, theatreId) -> screenId, addMovie(Movie) -> movieId, deleteMovie(movieId) : movieId
 
